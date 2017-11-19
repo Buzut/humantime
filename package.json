@@ -1,0 +1,30 @@
+{
+  "name": "humantime",
+  "version": "0.8.0",
+  "description": "Lightweight Moment.js inspired module for human-readable time & dates",
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buzut/humantime.git"
+  },
+  "keywords": [
+    "moment",
+    "date",
+    "time",
+    "parse",
+    "format",
+    "validate",
+    "i18n",
+    "l10n"
+  ],
+  "author": "Buzut (buzut.fr)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Buzut/humantime/issues"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-airbnb-base": "latest",
+    "eslint-plugin-import": "latest",
+  }
+}
