@@ -28,7 +28,6 @@ function humanDate(date) {
 
         if (diffHour === 0 && diffMinute > 30 && diffMinute <= 90) return '1 h';
         else if (diffHour === 0) return `${diffMinute} min`;
-        else if (diffMinute > 30) return `${diffHour + 1} h`;
         return `${diffHour} h`;
     }
 
