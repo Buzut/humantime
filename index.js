@@ -1,6 +1,6 @@
 function humanDate(date) {
     let dateObj;
-    if (typeof date === 'string') dateObj = new Date(date);
+    if (typeof date === 'string') dateObj = new Date(date)
     else dateObj = date;
 
     const options = { month: 'long', day: 'numeric' };
@@ -19,16 +19,14 @@ function humanDate(date) {
     const nowMinute = now.getMinutes();
 
     // set year only if not the same year as now
-    if (dateYear !== nowYear) {
-        options.year = 'numeric';
-    }
+    if (dateYear !== nowYear) options.year = 'numeric';
 
     // if today, display relative time
     if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay) {
-        const diffHour = nowHour - (dateHour + 1);
+        const diffHour = nowHour - dateHour;
         const diffMinute = (nowMinute + 60) - dateMinute;
 
-        if (diffHour === 0 && diffMinute === 60) return '1 h';
+        if (diffHour === 0 && diffMinute > 30 && diffMinute <= 90) return '1 h';
         else if (diffHour === 0) return `${diffMinute} min`;
         else if (diffMinute > 30) return `${diffHour + 1} h`;
         return `${diffHour} h`;
