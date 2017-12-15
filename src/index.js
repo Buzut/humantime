@@ -1,6 +1,6 @@
-function humanDate(date) {
+export default function humanDate(date) {
     let dateObj;
-    if (typeof date === 'string') dateObj = new Date(date)
+    if (typeof date === 'string') dateObj = new Date(date);
     else dateObj = date;
 
     const options = { month: 'long', day: 'numeric' };
@@ -33,5 +33,3 @@ function humanDate(date) {
 
     return dateObj.toLocaleString('latn', options);
 }
-
-module.exports = humanDate;
