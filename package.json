@@ -1,10 +1,13 @@
 {
   "name": "humantime",
-  "version": "0.8.3",
+  "version": "1.0.0",
   "description": "Lightweight Moment.js inspired module for human-readable time & dates",
   "main": "lib/index.js",
   "module": "src/index.js",
-  "files": ["src", "lib"],
+  "files": [
+    "src",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Buzut/humantime.git"
