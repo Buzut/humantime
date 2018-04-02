@@ -24,10 +24,11 @@ export default function humanDate(date) {
     // if today, display relative time
     if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay) {
         const diffHour = nowHour - dateHour;
-        const diffMinute = (nowMinute + 60) - dateMinute;
+        const diffMinute = Math.abs(nowMinute - dateMinute);
 
-        if (diffHour === 0 && diffMinute > 30 && diffMinute <= 90) return '1 h';
+        if (diffHour === 0 && diffMinute > 30) return '1 h';
         else if (diffHour === 0) return `${diffMinute} min`;
+        else if (diffMinute >= 30) return `${diffHour + 1} h`;
         return `${diffHour} h`;
     }
 
