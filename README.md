@@ -35,6 +35,7 @@ const formattedDateObj = humanTime(new Date());
 That's all there is to know!
 
 ## Contributing
-
 There's sure room for improvement, so feel free to hack around and submit PRs!
 Please just follow the style of the existing code, which is [Airbnb's style](http://airbnb.io/javascript/) with [minor modifications](.eslintrc).
+
+To maintain things clear and visual, please follow the [git commit template](https://github.com/Buzut/git-emojis-hook).
