@@ -30,11 +30,17 @@ const formattedDateStr = humanTime('2017-11-18T10:11:47.232Z');
 
 // or a Date object
 const formattedDateObj = humanTime(new Date());
+
+// alternatively, you can set the locale argument
+// it defaults to default with latin numbers
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument
+const formattedDateObjFrenchCanadian = humanTime(new Date(), 'fr-CA');
 ```
 
 That's all there is to know!
 
 ## Contributing
+
 There's sure room for improvement, so feel free to hack around and submit PRs!
 Please just follow the style of the existing code, which is [Airbnb's style](http://airbnb.io/javascript/) with [minor modifications](.eslintrc).
 

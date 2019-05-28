@@ -1,20 +1,20 @@
-export default function humanDate(date) {
+export default function humanDate(date, locales = 'default-u-nu-latn') {
     let dateObj;
     if (typeof date === 'string') dateObj = new Date(date);
     else dateObj = date;
 
     const options = { month: 'long', day: 'numeric' };
 
-    const dateYear = dateObj.toLocaleString('latn', { year: 'numeric' });
-    const dateMonth = dateObj.toLocaleString('latn', { month: 'numeric' });
-    const dateDay = dateObj.toLocaleString('latn', { day: 'numeric' });
+    const dateYear = dateObj.toLocaleString(locales, { year: 'numeric' });
+    const dateMonth = dateObj.toLocaleString(locales, { month: 'numeric' });
+    const dateDay = dateObj.toLocaleString(locales, { day: 'numeric' });
     const dateHour = dateObj.getHours();
     const dateMinute = dateObj.getMinutes();
 
     const now = new Date();
-    const nowYear = now.toLocaleString('latn', { year: 'numeric' });
-    const nowMonth = now.toLocaleString('latn', { month: 'numeric' });
-    const nowDay = now.toLocaleString('latn', { day: 'numeric' });
+    const nowYear = now.toLocaleString(locales, { year: 'numeric' });
+    const nowMonth = now.toLocaleString(locales, { month: 'numeric' });
+    const nowDay = now.toLocaleString(locales, { day: 'numeric' });
     const nowHour = now.getHours();
     const nowMinute = now.getMinutes();
 
@@ -32,5 +32,5 @@ export default function humanDate(date) {
         return `${diffHour} h`;
     }
 
-    return dateObj.toLocaleString('latn', options);
+    return dateObj.toLocaleString(locales, options);
 }
