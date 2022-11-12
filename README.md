@@ -6,11 +6,7 @@ humanTime is a super lightweight module aimed at formating time and date in a hu
 - with a localized string if more than 24 hours ago (12 décembre, December 12…)
 - with a localized string mentionning the year if not the same year as we are (12 décembre 2014, December 12, 2014…)
 
-## Under the hood
-
-The module takes advantage of modern browsers' [`Intl`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl) capabilities. It allows for an extremely lightweight lib (less than 1kB gzipped) as there is no need to embbed explicit translation and formating rules.
-
-`Intl` support [is quite broad](https://caniuse.com/#feat=internationalization) so there's no need to polyfill if you're targetting reasonably modern browsers.
+This default behaviour can be changed by using the options object.
 
 ## Installation & usage
 
@@ -19,10 +15,6 @@ npm install humantime
 ```
 
 ```js
-// require using commonJS
-const humanTime = require('humantime');
-
-// or in es6, using a module bundler like webpack
 import humanTime from 'humantime';
 
 // you can pass the function either a plain string
@@ -31,13 +23,27 @@ const formattedDateStr = humanTime('2017-11-18T10:11:47.232Z');
 // or a Date object
 const formattedDateObj = humanTime(new Date());
 
-// alternatively, you can set the locale argument
-// it defaults to default with latin numbers
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument
-const formattedDateObjFrenchCanadian = humanTime(new Date(), 'fr-CA');
+// options allow you to define the module's behaviour
+const formattedDateObjFrenchCanadian = humanTime(new Date(), {
+    locale: 'fr-FR',
+    disableRelative: true
+});
 ```
 
+### The options object
+
+* `locale` defaults to the browser default with latin numbers, but you can pass any ISO language code or any [`Locales`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument) supported by the [`Intl` api](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
+* `year`, `day` and `month` define the display format as per the [DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) options
+* `forceYear` (bool) to force display the year even when it's the current year
+* `disableRelative` (bool) to always display absolute dates
+
 That's all there is to know!
+
+## Under the hood
+
+The module takes advantage of modern browsers' [`Intl`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl) capabilities. It allows for an extremely lightweight lib (less than 1kB gzipped) as there is no need to embbed explicit translation and formating rules.
+
+`Intl` support [is quite broad](https://caniuse.com/#feat=internationalization) so there's no need to polyfill if you're targetting reasonably modern browsers.
 
 ## Contributing
 

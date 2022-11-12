@@ -1,28 +1,38 @@
-export default function humanDate(date, locales = 'default-u-nu-latn') {
+export default function humanDate(date, opts) {
     let dateObj;
     if (typeof date === 'string') dateObj = new Date(date);
     else dateObj = date;
 
-    const options = { month: 'long', day: 'numeric' };
+    const locale = opts?.locale ? opts.locale : 'default-u-nu-latn';
 
-    const dateYear = dateObj.toLocaleString(locales, { year: 'numeric' });
-    const dateMonth = dateObj.toLocaleString(locales, { month: 'numeric' });
-    const dateDay = dateObj.toLocaleString(locales, { day: 'numeric' });
+    const options = {
+        year: opts?.year ? opts.year : 'numeric',
+        month: opts?.month ? opts.month : 'long',
+        day: opts?.day ? opts.day : 'numeric',
+        forceYear: opts?.forceYear || false,
+        disableRelative: opts?.disableRelative || false
+    };
+
+    console.log(options.forceYear);
+
+    const dateYear = dateObj.toLocaleString(locale, { year: 'numeric' });
+    const dateMonth = dateObj.toLocaleString(locale, { month: 'numeric' });
+    const dateDay = dateObj.toLocaleString(locale, { day: 'numeric' });
     const dateHour = dateObj.getHours();
     const dateMinute = dateObj.getMinutes();
 
     const now = new Date();
-    const nowYear = now.toLocaleString(locales, { year: 'numeric' });
-    const nowMonth = now.toLocaleString(locales, { month: 'numeric' });
-    const nowDay = now.toLocaleString(locales, { day: 'numeric' });
+    const nowYear = now.toLocaleString(locale, { year: 'numeric' });
+    const nowMonth = now.toLocaleString(locale, { month: 'numeric' });
+    const nowDay = now.toLocaleString(locale, { day: 'numeric' });
     const nowHour = now.getHours();
     const nowMinute = now.getMinutes();
 
-    // set year only if not the same year as now
-    if (dateYear !== nowYear) options.year = 'numeric';
+    // set year only if not the same year as now or if set to force
+    if (dateYear !== nowYear || options.forceYear) options.year = 'numeric';
 
     // if today, display relative time
-    if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay) {
+    if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay && !options.disableRelative) {
         const diffHour = nowHour - dateHour;
         const diffMinute = Math.abs(nowMinute - dateMinute);
 
@@ -32,5 +42,5 @@ export default function humanDate(date, locales = 'default-u-nu-latn') {
         return `${diffHour} h`;
     }
 
-    return dateObj.toLocaleString(locales, options);
+    return dateObj.toLocaleString(locale, options);
 }
