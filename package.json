@@ -1,31 +1,31 @@
 {
-    "name": "humantime",
-    "version": "2.1.0",
-    "description": "Lightweight Moment.js inspired module for human-readable time & dates",
-    "type": "module",
-    "exports": {
-        ".": "./src/index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Buzut/humantime.git"
-    },
-    "keywords": [
-        "moment",
-        "date",
-        "time",
-        "parse",
-        "format",
-        "validate",
-        "i18n",
-        "l10n"
-    ],
-    "author": "Buzut (buzut.net)",
-    "license": "BSD-3-Clause",
-    "bugs": {
-        "url": "https://github.com/Buzut/humantime/issues"
-    },
-    "devDependencies": {
-        "prettier": "^3.3.3"
-    }
+  "name": "humantime",
+  "version": "2.1.0",
+  "description": "Lightweight Moment.js inspired module for human-readable time & dates",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buzut/humantime.git"
+  },
+  "keywords": [
+    "moment",
+    "date",
+    "time",
+    "parse",
+    "format",
+    "validate",
+    "i18n",
+    "l10n"
+  ],
+  "author": "Buzut (buzut.net)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Buzut/humantime/issues"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
 }
