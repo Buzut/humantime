@@ -1,6 +1,6 @@
 {
   "name": "humantime",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Lightweight Moment.js inspired module for human-readable time & dates",
   "type": "module",
   "exports": {
