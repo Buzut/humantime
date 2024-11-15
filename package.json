@@ -1,41 +1,31 @@
 {
-  "name": "humantime",
-  "version": "2.0.0",
-  "description": "Lightweight Moment.js inspired module for human-readable time & dates",
-  "main": "lib/index.js",
-  "module": "src/index.js",
-  "files": [
-    "src",
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Buzut/humantime.git"
-  },
-  "keywords": [
-    "moment",
-    "date",
-    "time",
-    "parse",
-    "format",
-    "validate",
-    "i18n",
-    "l10n"
-  ],
-  "author": "Buzut (buzut.net)",
-  "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/Buzut/humantime/issues"
-  },
-  "devDependencies": {
-    "eslint": "^8.16.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "rollup": "^2.33.1"
-  },
-  "scripts": {
-    "prepare": "test -d .git && cd .git/hooks/ && curl -O https://raw.githubusercontent.com/Buzut/git-emojis-hook/master/commit-msg && curl -O https://raw.githubusercontent.com/Buzut/git-emojis-hook/master/prepare-commit-msg && chmod +x * || exit 0",
-    "build": "rollup -c",
-    "prepublish": "npm run build"
-  }
+    "name": "humantime",
+    "version": "2.1.0",
+    "description": "Lightweight Moment.js inspired module for human-readable time & dates",
+    "type": "module",
+    "exports": {
+        ".": "./src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Buzut/humantime.git"
+    },
+    "keywords": [
+        "moment",
+        "date",
+        "time",
+        "parse",
+        "format",
+        "validate",
+        "i18n",
+        "l10n"
+    ],
+    "author": "Buzut (buzut.net)",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/Buzut/humantime/issues"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3"
+    }
 }
