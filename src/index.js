@@ -11,14 +11,14 @@ export default function (date, opts) {
     day: opts?.day ? opts.day : 'numeric'
   };
 
-  if (opts.forceTime) {
+  if (opts?.forceTime) {
     options.hour = 'numeric';
     options.minute = 'numeric';
   }
 
-  if (opts.hour) options.hour = opts.hour;
-  if (opts.minute) options.minute = opts.minute;
-  if (opts.second) options.second = opts.hour;
+  if (opts?.hour) options.hour = opts.hour;
+  if (opts?.minute) options.minute = opts.minute;
+  if (opts?.second) options.second = opts.hour;
 
   const dateYear = dateObj.toLocaleString(locale, { year: 'numeric' });
   const dateMonth = dateObj.toLocaleString(locale, { month: 'numeric' });
@@ -34,9 +34,9 @@ export default function (date, opts) {
   const nowMinute = now.getMinutes();
 
   // set year only if not the same year as now or if set to force
-  if (dateYear !== nowYear || opts.forceYear) options.year = 'numeric';
+  if (dateYear !== nowYear || opts?.forceYear) options.year = 'numeric';
 
-  if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay && !opts.disableRelative) {
+  if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay && !opts?.disableRelative) {
     // if today, display relative time
     const diffHour = nowHour - dateHour;
     const diffMinute = Math.abs(nowMinute - dateMinute);
