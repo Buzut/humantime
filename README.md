@@ -4,10 +4,10 @@ Convert timestamps to natural language: "2024-11-15 07:13:27" becomes "Yesterday
 
 humanTime is a no dependency module for the Browser and the server (Node.js, Bun & Deno) aimed at formatting time and date in a human readable format. Time is expressed as:
 
--   minutes if `date` < 1 hour (3 min, 10 min…),
--   hours if `date` < 24 hours (1 h, 6 h…),
--   a localized string if more than 24 hours ago (12 décembre, December 12…)
--   a localized string mentioning the year if not the same year as we are (12 décembre 2014, December 12, 2014…)
+- minutes if `date` < 1 hour (3 min, 10 min…),
+- hours if `date` < 24 hours (1 h, 6 h…),
+- a localized string if more than 24 hours ago (12 décembre, December 12…)
+- a localized string mentioning the year if not the same year as we are (12 décembre 2014, December 12, 2014…)
 
 Behaviour can be changed with the options object. Regarding i18n, the module defaults to the environment's locale. Either the browser's default language for browsers, or the server locale for server side runtime.
 
