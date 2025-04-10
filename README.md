@@ -1,60 +1,62 @@
 # humanTime
 
-Convert timestamps to natural language: "2024-11-15 07:13:27" becomes "Yesterday" or "Last year" depending in when you are NOW.
+Convert timestamps to natural language: "2025-04-08 07:13:27" becomes "yesterday" or "2 hours ago" based on the current time (e.g., April 9, 2025).
 
-humanTime is a no dependency module for the Browser and the server (Node.js, Bun & Deno) aimed at formatting time and date in a human readable format. Time is expressed as:
+`humanTime` is a zero-dependency module for browsers and servers (Node.js, Bun, Deno) that formats dates and times into human-readable strings. It expresses time as:
 
-- minutes if `date` < 1 hour (3 min, 10 min…),
-- hours if `date` < 24 hours (1 h, 6 h…),
-- a localized string if more than 24 hours ago (12 décembre, December 12…)
-- a localized string mentioning the year if not the same year as we are (12 décembre 2014, December 12, 2014…)
+- Seconds if under 1 minute (e.g., "30 seconds ago"),
+- Minutes if under 1 hour (e.g., "45 minutes ago"),
+- Hours if under 24 hours (e.g., "2 hours ago"),
+- Days if within the same year (e.g., "3 days ago" or "tomorrow"),
+- A localized absolute date if in a different year (e.g., "April 9, 2024" or "9 avril 2024").
 
-Behaviour can be changed with the options object. Regarding i18n, the module defaults to the environment's locale. Either the browser's default language for browsers, or the server locale for server side runtime.
+Customize the output with an options object. For internationalization (i18n), it defaults to the environment’s locale—browser language in the client or system locale on the server.
 
-## Installation & usage
+## Installation & Usage
 
-```
+```bash
 npm install humantime
 ```
 
-```js
+```javascript
 import humanTime from 'humantime';
 
-// you can pass the function either a plain string
-const formattedDateStr = humanTime('2017-11-18T10:11:47.232Z');
+// Use a string
+const formattedDateStr = humanTime('2025-04-09T10:11:47.232Z');
 
-// or a Date object
+// Or a Date object
 const formattedDateObj = humanTime(new Date());
 
-// options allow you to define the module's behaviour
-const formattedDateObjFrenchCanadian = humanTime(new Date(), {
+// Customize with options
+const formattedFrench = humanTime(new Date(), {
   locale: 'fr-FR',
-  disableRelative: true, // "12 Décembre" instead of "5 min"
-  month: 'numeric' // "12/12" instead of "12 Décembre"
+  disableRelative: true, // "9 avril 2025" instead of "5 minutes ago"
+  month: 'numeric'      // "09/04/2025" instead of "9 avril 2025"
 });
 ```
 
-### The options object
+### The Options Object
 
-- `locale` defaults to the browser default with latin numbers, but you can pass any ISO language code or any [`Locales`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument) supported by the [`Intl` api](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
-- `year`, `day` and `month` (and `hour`, `minute`, `second` for time) define the display format as per the [DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) options
-- `forceYear` (bool) to force display the year even when it's the current year
-- `forceTime` (bool) to show time precision when in absolute mode (18 October 2022 at 2:40 am)
-- `disableRelative` (bool) to always display absolute dates
+- **`locale`**: Defaults to the environment’s locale with Latin numbers (`default-u-nu-latn`). Accepts any ISO language code or [`Locales`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument) from the [`Intl` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl).
+- **`year`, `month`, `day`**: Set display format per [`DateTimeFormat` options](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) (e.g., `'numeric'`, `'long'`).
+- **`hour`, `minute`, `second`**: Add time details (e.g., `'numeric'` for "14:30").
+- **`forceYear` (bool)**: Include the year even if it’s the current year (e.g., "April 9, 2025" vs. "April 9").
+- **`forceTime` (bool)**: Show time in absolute mode (e.g., "April 9, 2025, 2:40 PM").
+- **`disableRelative` (bool)**: Use absolute dates only (e.g., "April 9, 2025" vs. "2 days ago").
 
-Note that in the `forceTime` case, only hour and minute is displayed by default. If you need seconds as well, you need to pass it explicitly:
+For `forceTime`, hours and minutes appear by default. To include seconds, specify it:
 
-```js
-humanTime(timeStamp, { forceTime: true, second: 'numeric' });
+```javascript
+humanTime(timestamp, { forceTime: true, second: 'numeric' });
 ```
 
-That's all there is to know!
+That’s all you need!
 
-## Under the hood
+## Under the Hood
 
-The module takes advantage of capabilities natively offered by [`Intl`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). It allows for an extremely lightweight lib (less than 1kB gzipped) as there is no need to embed explicit translation and formatting rules.
+`humanTime` uses the native [`Intl` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl), including `Intl.RelativeTimeFormat`, for natural, locale-aware formatting. This keeps it lightweight (<1kB gzipped) without needing built-in translation or formatting rules.
 
-`Intl` support [is quite broad](https://caniuse.com/#feat=internationalization) so there's no need to polyfill if you're targetting reasonably modern browsers.
+[`Intl` support](https://caniuse.com/#feat=internationalization) is robust, so no polyfills are required for modern browsers (Chrome, Firefox, Safari, Edge).
 
 ## Go to bed smarter than you woke up
 
@@ -74,5 +76,4 @@ As it has full support in glibc, it's in all operating systems and browers: Chro
 
 ## Contributing
 
-There's sure room for improvement, so feel free to hack around and submit PRs!
-Just make sure to use Prettier for code formatting and you're all set 👍
+Room for improvement? Hack away and submit PRs! Use ESLint for linting & formatting, and you’re set 👍.

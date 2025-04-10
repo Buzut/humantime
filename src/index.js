@@ -1,3 +1,19 @@
+/**
+ * Format a date string or Date object based on provided options.
+ * @param {string|Date} date - The date to format.
+ * @param {Object} opts - Optional formatting options.
+ * @param {string} opts.locale - The locale to use for formatting.
+ * @param {string} opts.year - The format for the year.
+ * @param {string} opts.month - The format for the month.
+ * @param {string} opts.day - The format for the day.
+ * @param {boolean} opts.forceTime - Whether to include time components.
+ * @param {string} opts.hour - The format for the hour.
+ * @param {string} opts.minute - The format for the minute.
+ * @param {string} opts.second - The format for the second.
+ * @param {boolean} opts.forceYear - Whether to force the year to be shown.
+ * @param {boolean} opts.disableRelative - Whether to disable relative time formatting.
+ * @returns {string} The formatted date string.
+ */
 export default function (date, opts) {
   let dateObj;
   if (typeof date === 'string') dateObj = new Date(date);
@@ -18,33 +34,47 @@ export default function (date, opts) {
 
   if (opts?.hour) options.hour = opts.hour;
   if (opts?.minute) options.minute = opts.minute;
-  if (opts?.second) options.second = opts.hour;
+  if (opts?.second) options.second = opts.second;
 
   const dateYear = dateObj.toLocaleString(locale, { year: 'numeric' });
   const dateMonth = dateObj.toLocaleString(locale, { month: 'numeric' });
   const dateDay = dateObj.toLocaleString(locale, { day: 'numeric' });
-  const dateHour = dateObj.getHours();
-  const dateMinute = dateObj.getMinutes();
 
   const now = new Date();
   const nowYear = now.toLocaleString(locale, { year: 'numeric' });
   const nowMonth = now.toLocaleString(locale, { month: 'numeric' });
   const nowDay = now.toLocaleString(locale, { day: 'numeric' });
-  const nowHour = now.getHours();
-  const nowMinute = now.getMinutes();
 
-  // set year only if not the same year as now or if set to force
+  // Set year only if not the same year as now or if forced
   if (dateYear !== nowYear || opts?.forceYear) options.year = 'numeric';
 
-  if (dateYear === nowYear && dateMonth === nowMonth && dateDay === nowDay && !opts?.disableRelative) {
-    // if today, display relative time
-    const diffHour = nowHour - dateHour;
-    const diffMinute = Math.abs(nowMinute - dateMinute);
+  if (dateYear === nowYear && !opts?.disableRelative) {
+    // Calculate difference in milliseconds
+    const diffMs = dateObj - now;
+    const diffSeconds = Math.round(diffMs / 1000);
+    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
 
-    if (diffHour === 0 && diffMinute > 30) return '1 h';
-    else if (diffHour === 0) return `${diffMinute} min`;
-    else if (diffMinute >= 30) return `${diffHour + 1} h`;
-    return `${diffHour} h`;
+    if (dateMonth === nowMonth && dateDay === nowDay) {
+      if (Math.abs(diffSeconds) < 60) {
+        return rtf.format(diffSeconds, 'second'); // e.g., "5 seconds ago"
+      }
+
+      else if (Math.abs(diffSeconds) < 3600) {
+        const minutes = Math.round(diffSeconds / 60);
+        return rtf.format(minutes, 'minute'); // e.g., "30 minutes ago"
+      }
+
+      else {
+        const hours = Math.round(diffSeconds / 3600);
+        return rtf.format(hours, 'hour'); // e.g., "2 hours ago"
+      }
+    }
+
+    // Different day, same year
+    else {
+      const days = Math.round(diffSeconds / (3600 * 24));
+      return rtf.format(days, 'day'); // e.g., "2 days ago" or "tomorrow"
+    }
   }
 
   return dateObj.toLocaleString(locale, options);
