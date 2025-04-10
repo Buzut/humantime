@@ -1,20 +1,23 @@
 /**
  * Format a date string or Date object based on provided options.
- * @param {string|Date} date - The date to format.
- * @param {Object} opts - Optional formatting options.
- * @param {string} opts.locale - The locale to use for formatting.
- * @param {string} opts.year - The format for the year.
- * @param {string} opts.month - The format for the month.
- * @param {string} opts.day - The format for the day.
- * @param {boolean} opts.forceTime - Whether to include time components.
- * @param {string} opts.hour - The format for the hour.
- * @param {string} opts.minute - The format for the minute.
- * @param {string} opts.second - The format for the second.
- * @param {boolean} opts.forceYear - Whether to force the year to be shown.
- * @param {boolean} opts.disableRelative - Whether to disable relative time formatting.
+ * @param {string | Date} date - The date to format.
+ * @param {Object} [opts] - Optional formatting options.
+ * @param {string} [opts.locale] - The locale to use for formatting.
+ * @param {"numeric" | "2-digit"} [opts.year] - The format for the year.
+ * @param {"long" | "short" | "narrow" | "numeric" | "2-digit"} [opts.month] - The format for the month.
+ * @param {"numeric" | "2-digit"} [opts.day] - The format for the day.
+ * @param {boolean} [opts.forceTime] - Whether to include time components.
+ * @param {"numeric" | "2-digit"} [opts.hour] - The format for the hour.
+ * @param {"numeric" | "2-digit"} [opts.minute] - The format for the minute.
+ * @param {"numeric" | "2-digit"} [opts.second] - The format for the second.
+ * @param {boolean} [opts.forceYear] - Whether to force the year to be shown.
+ * @param {boolean} [opts.disableRelative] - Whether to disable relative time formatting.
  * @returns {string} The formatted date string.
  */
 export default function (date, opts) {
+  /**
+   * @type {Date}
+   */
   let dateObj;
   if (typeof date === 'string') dateObj = new Date(date);
   else dateObj = date;
@@ -40,6 +43,9 @@ export default function (date, opts) {
   const dateMonth = dateObj.toLocaleString(locale, { month: 'numeric' });
   const dateDay = dateObj.toLocaleString(locale, { day: 'numeric' });
 
+  /**
+   * @type {Date}
+   */
   const now = new Date();
   const nowYear = now.toLocaleString(locale, { year: 'numeric' });
   const nowMonth = now.toLocaleString(locale, { month: 'numeric' });
@@ -50,7 +56,11 @@ export default function (date, opts) {
 
   if (dateYear === nowYear && !opts?.disableRelative) {
     // Calculate difference in milliseconds
-    const diffMs = dateObj - now;
+
+    /**
+     * @type {number}
+     */
+    const diffMs = dateObj.getTime() - now.getTime();
     const diffSeconds = Math.round(diffMs / 1000);
     const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
 

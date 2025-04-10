@@ -1,6 +1,6 @@
 {
   "name": "humantime",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "author": "Buzut (buzut.net)",
   "repository": {
     "type": "git",
@@ -11,11 +11,13 @@
     "@stylistic/eslint-plugin": "^4.2.0",
     "eslint": "^9.24.0",
     "eslint-plugin-jsdoc": "^50.6.9",
-    "globals": "^16.0.0"
+    "globals": "^16.0.0",
+    "typescript": "^5.8.3"
   },
   "exports": {
     ".": "./src/index.js"
   },
+  "types": "./src/index.d.ts",
   "bugs": {
     "url": "https://github.com/Buzut/humantime/issues"
   },
