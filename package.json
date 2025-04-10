@@ -1,17 +1,28 @@
 {
   "name": "humantime",
   "version": "2.2.1",
-  "description": "Lightweight Moment.js inspired module for human-readable time & dates",
-  "type": "module",
-  "exports": {
-    ".": "./src/index.js"
-  },
+  "author": "Buzut (buzut.net)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Buzut/humantime.git"
   },
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "eslint": "^9.24.0",
+    "eslint-plugin-jsdoc": "^50.6.9",
+    "globals": "^16.0.0"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Buzut/humantime/issues"
+  },
+  "description": "Super light universal module for human-readable time & dates",
   "keywords": [
     "moment",
+    "human",
     "date",
     "time",
     "parse",
@@ -20,15 +31,9 @@
     "i18n",
     "l10n"
   ],
-  "author": "Buzut (buzut.net)",
   "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/Buzut/humantime/issues"
-  },
-  "devDependencies": {
-    "prettier": "^3.3.3"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "type": "module"
 }
